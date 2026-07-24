@@ -41,6 +41,7 @@ void loop(){
   baseline          = baseline * 0.999 + sensorReading * 0.001;
   float signal      = abs(sensorReading - baseline);
   envelope          = envelope * 0.7 + signal * 0.3;
+  // Set envelope sensitivity here:
   if(envelope > 7 && !isKnocking && (now - lastKnockTime > MIN_GAP)){
     isKnocking = true;
     knockCount++;
