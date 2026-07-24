@@ -41,13 +41,13 @@ void loop(){
   baseline          = baseline * 0.999 + sensorReading * 0.001;
   float signal      = abs(sensorReading - baseline);
   envelope          = envelope * 0.7 + signal * 0.3;
-  if(envelope > 15 && !isKnocking && (now - lastKnockTime > MIN_GAP)){
+  if(envelope > 7 && !isKnocking && (now - lastKnockTime > MIN_GAP)){
     isKnocking = true;
     knockCount++;
     lastKnockTime = now;
     set_led(RED);
   }
-  if(isKnocking && envelope < 8)    isKnocking = false;
+  if(isKnocking && envelope < 6)    isKnocking = false;
   if(now - lastKnockTime > MIN_GAP) set_led(GREEN);
   if(knockCount > 0 && (now - lastKnockTime > PUBLISH_DELAY)){
     String payload =  "{"
